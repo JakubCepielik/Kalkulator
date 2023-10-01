@@ -40,6 +40,37 @@ namespace Kalkulator.Controllers
             return View(osoby);
         }
 
+        public IActionResult Urodziny(Urodziny urodziny)
+        {
+            ViewBag.powitanie = $"Witaj {urodziny.Imie} masz {DateTime.Now.Year - urodziny.Rok} lat";
+            return View();
+        }
+
+        public IActionResult Kalkulator(Kalk kalk)
+        {
+            float x = 0;
+			switch (kalk.Dzialanie)
+            {
+                case "1":
+                    x = kalk.Liczba1 + kalk.Liczba2;
+                    break;
+				case "2":
+                    x = kalk.Liczba1 - kalk.Liczba2;
+					break;
+				case "3":
+                    x = kalk.Liczba1 * kalk.Liczba2;
+					break;
+				case "4":
+                    x = kalk.Liczba1 / kalk.Liczba2;
+					break;
+                default:
+                    break;
+			}
+            ViewBag.wynik = $"Wynik: {x}";
+            return View();
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
